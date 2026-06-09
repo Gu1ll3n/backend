@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cemedica-frontend
+  labels:
+    app: cemedica-frontend
+spec:
+  replicas: 2 # Frontend static files via Nginx can be scaled horizontally
+  selector:
+    matchLabels:
+      app: cemedica-frontend
+  template:
+    metadata:
+      labels:
+        app: cemedica-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: cemedica-frontend:latest
+          ports:
+            - containerPort: 80

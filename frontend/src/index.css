@@ -1,0 +1,219 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+    --font-heading: var(--font-sans);
+    --font-sans: 'Geist Variable', sans-serif;
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --radius-sm: calc(var(--radius) * 0.6);
+    --radius-md: calc(var(--radius) * 0.8);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) * 1.4);
+    --radius-2xl: calc(var(--radius) * 1.8);
+    --radius-3xl: calc(var(--radius) * 2.2);
+    --radius-4xl: calc(var(--radius) * 2.6);
+
+    /* Custom CEMEDICA brand colors registered in Tailwind */
+    --color-brand-teal: var(--brand-teal);
+    --color-brand-teal-dark: var(--brand-teal-dark);
+    --color-brand-orange: var(--brand-orange);
+    --color-brand-orange-dark: var(--brand-orange-dark);
+}
+
+:root {
+    /* Brand Dark Clinical Palette - Applied by default at root level */
+    --background: hsl(182 30% 7%);
+    --foreground: hsl(180 10% 96%);
+    
+    --card: hsl(182 25% 12%);
+    --card-foreground: hsl(180 10% 96%);
+    
+    --popover: hsl(182 25% 12%);
+    --popover-foreground: hsl(180 10% 96%);
+    
+    --primary: hsl(177 52% 41%); /* Light Teal #33a19b */
+    --primary-foreground: hsl(180 10% 98%);
+    
+    --secondary: hsl(182 25% 18%);
+    --secondary-foreground: hsl(180 10% 96%);
+    
+    --muted: hsl(182 25% 16%);
+    --muted-foreground: hsl(180 8% 65%);
+    
+    --accent: hsl(182 25% 18%);
+    --accent-foreground: hsl(180 10% 96%);
+    
+    --destructive: hsl(0 84% 60%);
+    --border: hsl(182 25% 18% / 0.4);
+    --input: hsl(182 25% 14% / 0.6);
+    --ring: hsl(177 52% 41%);
+    --radius: 0.625rem;
+
+    /* Custom primitive tokens */
+    --brand-teal: #33a19b;
+    --brand-teal-dark: #1e6063;
+    --brand-orange: #ff8c00;
+    --brand-orange-dark: #e67300;
+
+    --sidebar: hsl(182 30% 7%);
+    --sidebar-foreground: hsl(180 8% 85%);
+    --sidebar-primary: hsl(177 52% 41%);
+    --sidebar-primary-foreground: hsl(180 10% 98%);
+    --sidebar-accent: hsl(182 25% 14%);
+    --sidebar-accent-foreground: hsl(180 10% 96%);
+    --sidebar-border: hsl(182 25% 18% / 0.4);
+    --sidebar-ring: hsl(177 52% 41%);
+
+    --chart-1: hsl(177 52% 41%);
+    --chart-2: hsl(33 100% 50%);
+    --chart-3: hsl(182 25% 18%);
+    --chart-4: hsl(180 8% 65%);
+    --chart-5: hsl(0 84% 60%);
+}
+
+.dark {
+    /* Keep identical to :root as we are default-dark clinical app */
+    --background: hsl(182 30% 7%);
+    --foreground: hsl(180 10% 96%);
+    --card: hsl(182 25% 12%);
+    --card-foreground: hsl(180 10% 96%);
+    --popover: hsl(182 25% 12%);
+    --popover-foreground: hsl(180 10% 96%);
+    --primary: hsl(177 52% 41%);
+    --primary-foreground: hsl(180 10% 98%);
+    --secondary: hsl(182 25% 18%);
+    --secondary-foreground: hsl(180 10% 96%);
+    --muted: hsl(182 25% 16%);
+    --muted-foreground: hsl(180 8% 65%);
+    --accent: hsl(182 25% 18%);
+    --accent-foreground: hsl(180 10% 96%);
+    --destructive: hsl(0 84% 60%);
+    --border: hsl(182 25% 18% / 0.4);
+    --input: hsl(182 25% 14% / 0.6);
+    --ring: hsl(177 52% 41%);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground selection:bg-brand-teal/20 selection:text-white;
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(51, 161, 155, 0.04) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(255, 140, 0, 0.03) 0px, transparent 50%);
+    background-attachment: fixed;
+  }
+  html {
+    @apply font-sans antialiased;
+  }
+}
+
+/* Custom premium design utilities */
+@layer utilities {
+  /* Micro-animation of pulse line */
+  .pulse-line-active {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .pulse-line-active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--brand-teal), var(--brand-orange));
+    box-shadow: 0 1px 6px rgba(51, 161, 155, 0.5);
+    animation: heartBeatGlow 2.5s infinite ease-in-out;
+  }
+
+  /* Card elevation glassmorphism */
+  .card-premium {
+    @apply bg-card/65 backdrop-blur-md border border-border/80 rounded-xl transition-all duration-200;
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.25);
+  }
+
+  .card-premium:hover {
+    @apply border-brand-teal/30;
+    box-shadow: 
+      0 0 1px 0.5px rgba(51, 161, 155, 0.15),
+      0 8px 30px -4px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Heartbeat wave glowing border animation */
+  @keyframes heartBeatGlow {
+    0%, 100% {
+      opacity: 0.7;
+      filter: saturate(1);
+    }
+    50% {
+      opacity: 1;
+      filter: saturate(1.4);
+    }
+  }
+
+  /* Soft blinking breathing dot */
+  .pulse-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--brand-teal);
+    box-shadow: 0 0 0 0 rgba(51, 161, 155, 0.7);
+    animation: pulseDot 2s infinite cubic-bezier(0.66, 0, 0, 1);
+  }
+
+  .pulse-dot-orange {
+    background-color: var(--brand-orange);
+    box-shadow: 0 0 0 0 rgba(255, 140, 0, 0.7);
+    animation: pulseDotOrange 2s infinite cubic-bezier(0.66, 0, 0, 1);
+  }
+
+  @keyframes pulseDot {
+    to {
+      box-shadow: 0 0 0 10px rgba(51, 161, 155, 0);
+    }
+  }
+
+  @keyframes pulseDotOrange {
+    to {
+      box-shadow: 0 0 0 10px rgba(255, 140, 0, 0);
+    }
+  }
+}

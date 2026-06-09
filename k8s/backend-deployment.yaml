@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cemedica-backend
+  labels:
+    app: cemedica-backend
+spec:
+  replicas: 1 # SQLite requires a single replica to avoid database file lock issues from concurrent writing pods
+  selector:
+    matchLabels:
+      app: cemedica-backend
+  template:
+    metadata:
+      labels:
+        app: cemedica-backend
+    spec:
+      containers:
+        - name: backend
+          image: cemedica-backend:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DATABASE_URL
+              value: "file:/app/data/dev.db"
+            - name: JWT_SECRET
+              value: "cemedica-k8s-secret-key-change-me"
+          volumeMounts:
+            - name: backend-sqlite-storage
+              mountPath: /app/data
+      volumes:
+        - name: backend-sqlite-storage
+          persistentVolumeClaim:
+            claimName: backend-sqlite-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: backend-sqlite-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
